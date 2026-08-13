@@ -107,7 +107,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 20px}
     <h1>Music Quiz Trainer</h1>
     <div class="small">楽譜・音楽史・合唱・音楽記号・調号を10秒でトレーニング</div>
   </div>
-  <span class="version">Ver. 0.4.3</span>
+  <span class="version">Ver. 0.4.4</span>
 </header>
 
 <section class="card" id="homeCard">
@@ -352,21 +352,54 @@ function noteY(note,oct,clef){
   const ref=clef==="treble"?diatonicIndex("E",4):diatonicIndex("G",2);
   return bottom-(diatonicIndex(note,oct)-ref)*(gap/2);
 }
-function drawBaseStaff(clef){
+function drawBaseStaff(clef,variant="standard"){
   const s=$("staff");s.innerHTML="";
   const top=84,gap=22,left=88,right=704;
-  for(let i=0;i<5;i++)s.appendChild(svgEl("line",{x1:left,y1:top+i*gap,x2:right,y2:top+i*gap,stroke:"#24211e","stroke-width":"1.7"}));
-  // 和声法トレーナーの配置思想を踏襲し、音部記号を五線から大きく突出させる。
-  const y=clef==="treble"?top+62:top+55;
-  drawText(s,clef==="treble"?"𝄞":"𝄢",101,y,{
-    "font-size":clef==="treble"?116:88,
-    "font-family":"'Noto Music','Segoe UI Symbol',serif",
-    fill:"#24211e"
-  });
+  for(let i=0;i<5;i++){
+    s.appendChild(svgEl("line",{
+      x1:left,y1:top+i*gap,x2:right,y2:top+i*gap,
+      stroke:"#24211e","stroke-width":"1.7"
+    }));
+  }
+
+  // 音名クイズ専用の音部記号調整。
+  // 第2線は画面上から2本目（top + gap）。
+  const secondLineY=top+gap;
+  const noteMode=variant==="note";
+
+  if(clef==="treble"){
+    // ト音記号：
+    // 五線の上下から大きくはみ出すサイズにし、
+    // 上側の交差部分が第2線付近に重なるように配置する。
+    const size=noteMode?158:116;
+    const x=noteMode?86:101;
+    const y=noteMode
+      ? secondLineY+size*0.315
+      : top+62;
+    drawText(s,"𝄞",x,y,{
+      "font-size":size,
+      "font-family":"'Noto Music','Segoe UI Symbol',serif",
+      fill:"#24211e"
+    });
+  }else{
+    // ヘ音記号：
+    // 左側の大きな黒丸の中心が第2線の中心に重なるように配置する。
+    const size=noteMode?92:88;
+    const x=noteMode?94:101;
+    const y=noteMode
+      ? secondLineY+size*0.365
+      : top+55;
+    drawText(s,"𝄢",x,y,{
+      "font-size":size,
+      "font-family":"'Noto Music','Segoe UI Symbol',serif",
+      fill:"#24211e"
+    });
+  }
+
   return {s,top,gap,left,right};
 }
 function drawNoteQuestion(q){
-  const {s,top,gap}=drawBaseStaff(q.clef);
+  const {s,top,gap}=drawBaseStaff(q.clef,"note");
   const y=noteY(q.note,q.oct,q.clef),x=440,bottom=top+gap*4;
   if(y>bottom){
     for(let ly=bottom+gap;ly<=y+1;ly+=gap)s.appendChild(svgEl("line",{x1:x-30,y1:ly,x2:x+30,y2:ly,stroke:"#24211e","stroke-width":"1.7"}));
