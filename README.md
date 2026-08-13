@@ -1,63 +1,46 @@
 # Music Quiz Trainer
 
-音楽をクイズ形式で学習する、ブラウザだけで動作する音楽学習アプリです。  
-**Ver. 0.3.2**
+10秒制のクイズで音楽を学ぶ、ブラウザだけで動作するWebアプリです。
 
-## 主な機能
+## Version
+**Ver. 0.4.0**
 
-- 1問 **10秒** の制限時間
-- 音名クイズ
-  - ト音記号
-  - ヘ音記号
-  - 両方を混合
-- 音楽史クイズ **373問**
-- 音楽記号・楽語クイズ **88問**
-- 調号クイズ **120パターン以上**
-- 初級 / 中級 / 上級
+## コース
 - 総合クイズ
-- 正答率、累計問題数、最高連続正解をブラウザに保存
-- iPhone / スマートフォン表示対応
-- iPhone のノッチ / Dynamic Island の安全領域に対応
-- インストール不要
+- 音名クイズ
+- 音楽史クイズ
+- 日本の合唱クイズ（42問）
+- 世界の合唱クイズ（104問）
+- 多田武彦クイズ（140問）
+- 音楽記号クイズ
+- 調号クイズ
 
-## 使い方
+## Ver.0.4.0
+### 日本の合唱
+全日本合唱連盟、全日本合唱コンクール、国際交流、日本の代表的な合唱作曲家・作品を収録。
 
-### GitHub Pagesで公開する場合
+### 世界の合唱
+IFCM、世界合唱シンポジウム、World Youth Choir、合唱用語、宗教合唱、世界の代表的合唱作品を収録。
 
-1. GitHubで新しいリポジトリを作成します。
-2. このフォルダ内のファイルをリポジトリ直下へアップロードします。
-3. GitHubのリポジトリで **Settings → Pages** を開きます。
-4. **Build and deployment** の Source を **Deploy from a branch** にします。
-5. Branch を **main / (root)** に設定して **Save** を押します。
-6. 数分後、GitHub PagesのURLからアプリを利用できます。
+### 多田武彦
+代表的な男声合唱組曲、詩人、組曲に含まれる各曲、組曲《雨》の詩人などを収録。
+音楽之友社の「多田武彦 男声合唱曲集」掲載曲目と、パナムジカの作曲家・作品情報をもとに構成しています。
 
-> `index.html` は必ずリポジトリのルート（最上位）に置いてください。
+## GitHub Pages
+リポジトリ直下に以下を置いてください。
 
-### PCで直接使う場合
+- `index.html`
+- `README.md`
+- `CHANGELOG.md`
+- `.nojekyll`
 
-`index.html` をブラウザで開くだけで利用できます。
+GitHubの `Settings` → `Pages` で
+`Deploy from a branch` → `main` → `/(root)` を選んで保存します。
 
-## ファイル構成
-
-```text
-Music-Quiz-Trainer/
-├─ index.html
-├─ README.md
-├─ CHANGELOG.md
-└─ .nojekyll
-```
-
-## 学習記録について
-
-学習記録はブラウザの `localStorage` に保存されます。  
-そのため、別の端末や別のブラウザには自動同期されません。
-
-## Ver. 0.3.2
-
-- iPhone上部のノッチ / Dynamic Island / カメラ領域を避ける安全余白を追加
-- `safe-area-inset-top` に対応
-- 左右・下部もiPhoneのSafe Areaに対応
-
-## 公開方法
-
-このアプリは外部ライブラリを必要としない静的HTMLアプリのため、GitHub Pagesでそのまま公開できます。
+## 参考資料
+- 全日本合唱連盟「沿革」 https://jcanet.or.jp/profile/jca-history.htm
+- 全日本合唱連盟 英語版沿革 https://jcanet.or.jp/profile/jca-english.htm
+- International Federation for Choral Music, History https://www.ifcm.net/about-us/history
+- World Youth Choir, Our History https://www.worldyouthchoir.org/about-the-choir
+- Pana Musica「作曲家 多田武彦」 https://www.panamusica.co.jp/ja/appeal/composer/tadatakehiko.php
+- 音楽之友社「多田武彦 男声合唱曲集 1〜8」 https://www.ongakunotomo.co.jp/
